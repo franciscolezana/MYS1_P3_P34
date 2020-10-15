@@ -1,0 +1,11 @@
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\bin\Debug\P3_P34.exe.config
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\bin\Debug\P3_P34.exe
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\bin\Debug\P3_P34.pdb
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.csprojAssemblyReference.cache
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.Form1.resources
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.Properties.Resources.resources
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.csproj.GenerateResource.cache
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.csproj.CoreCompileInputs.cache
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.exe
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.pdb
+C:\Users\betor\Desktop\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.csproj.CopyComplete
