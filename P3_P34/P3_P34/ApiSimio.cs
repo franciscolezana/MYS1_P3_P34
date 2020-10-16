@@ -71,6 +71,15 @@ namespace P3_P34
             model.Facility.IntelligentObjects["Server6"].ObjectName = "SurOccidente";
             model.Facility.IntelligentObjects["Server7"].ObjectName = "NorOccidente";
             model.Facility.IntelligentObjects["Server8"].ObjectName = "Peten";
+
+            //FUERZAS ARMADAS
+            intelligentObjects.CreateObject("Source", new FacilityLocation(-8, 0, -66));
+            intelligentObjects.CreateObject("Sink", new FacilityLocation(-8, 0, -66));
+            intelligentObjects.CreateObject("ModelEntity", new FacilityLocation(-8, 0, -64));
+
+            model.Facility.IntelligentObjects["Source1"].ObjectName = "SalidaFuerzaArmada";
+            //model.Facility.IntelligentObjects["Sink1"].ObjectName = "FuerzaArmada";
+            model.Facility.IntelligentObjects["ModelEntity1"].ObjectName = "AvionMilitar";
         }
 
         public void crearMapa()
@@ -164,6 +173,10 @@ namespace P3_P34
             
             intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-20, 0, -54));
             ContadorTransferNode++;
+
+            //ULTIMO NODO
+            //intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-20, 0, -73));
+            //ContadorTransferNode++;
         }
 
         public void unirMapa()
@@ -198,6 +211,15 @@ namespace P3_P34
             intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode28"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode29"]), null);
             intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode29"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode30"]), null);
             intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode30"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode1"]), null);
+            
+            //FUERZAS ARMADAS
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SalidaFuerzaArmada"]).Nodes[0], (INodeObject)model.Facility.IntelligentObjects["TransferNode1"], null);
+            //intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode31"]), ((IFixedObject)model.Facility.IntelligentObjects["FuerzaArmada"]).Nodes[0], null);
+            //SOURCE FUERZA ARMADA
+            model.Facility.IntelligentObjects["SalidaFuerzaArmada"].Properties["InterarrivalTime"].Value = "Random.Exponential(15)";
+            model.Facility.IntelligentObjects["SalidaFuerzaArmada"].Properties["MaximumArrivals"].Value = "15";
+            model.Facility.IntelligentObjects["SalidaFuerzaArmada"].Properties["EntityType"].Value = "AvionMilitar";
+
 
         }
 
@@ -269,6 +291,8 @@ namespace P3_P34
             model.Facility.IntelligentObjects["BasicNode2"].ObjectName = "Sur";
             model.Facility.IntelligentObjects["BasicNode3"].ObjectName = "Oeste";
             model.Facility.IntelligentObjects["BasicNode4"].ObjectName = "Este";
+
+
         }
     }
 }
