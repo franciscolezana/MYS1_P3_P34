@@ -23,6 +23,7 @@ namespace P3_P34
         private IIntelligentObjects intelligentObjects;
         int ContadorPath = 1, ContadorServer = 1, ContadorSource = 1, ContadorSink = 1, ContadorPathSimple = 1, ContadorTimepath = 1, ContadorConveyor = 1, ContadorSeparator = 1, ContadorCombiner = 1;
         int ContadorTransferNode = 1, contAux = 1;
+        int ContadorBasicN = 1;
         public ApiSimio()
         {
             proyectoApi = SimioProjectFactory.LoadProject(rutabase, out warnings);
@@ -40,6 +41,7 @@ namespace P3_P34
             this.unirMapa();
             this.tamanioFronteras();
             this.velocidadAvion();
+            this.puntosCardinales();
 
             //CREACION MODELO
             SimioProjectFactory.SaveProject(proyectoApi, rutafinal, out warnings);
@@ -256,5 +258,17 @@ namespace P3_P34
             }
         }
 
+        public void puntosCardinales()
+        {
+            intelligentObjects.CreateObject("BasicNode", new FacilityLocation(0,0,-100));
+            intelligentObjects.CreateObject("BasicNode", new FacilityLocation(0,0,70));
+            intelligentObjects.CreateObject("BasicNode", new FacilityLocation(-93,0,0));
+            intelligentObjects.CreateObject("BasicNode", new FacilityLocation(90,0,0));
+
+            model.Facility.IntelligentObjects["BasicNode1"].ObjectName = "Norte1";
+            model.Facility.IntelligentObjects["BasicNode2"].ObjectName = "Sur";
+            model.Facility.IntelligentObjects["BasicNode3"].ObjectName = "Oeste";
+            model.Facility.IntelligentObjects["BasicNode4"].ObjectName = "Este";
+        }
     }
 }
