@@ -37,9 +37,10 @@ namespace P3_P34
           
                 this.crearRegiones();
                 this.crearMapa();
-
+                this.unirMapa();
                 //CREACION MODELO
                 SimioProjectFactory.SaveProject(proyectoApi, rutafinal, out warnings);
+                MessageBox.Show("El proyecto Simio ha sido generado");
                 Console.WriteLine("Modelo Creado");
           
                 //Console.WriteLine("Error al crear modelo");
@@ -160,6 +161,40 @@ namespace P3_P34
             ContadorTransferNode++;
         }
 
+        public void unirMapa()
+        {
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode1"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode2"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode2"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode3"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode3"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode4"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode4"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode5"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode5"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode6"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode6"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode7"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode7"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode8"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode8"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode9"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode9"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode10"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode10"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode11"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode11"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode12"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode12"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode13"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode13"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode14"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode14"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode15"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode15"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode16"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode16"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode17"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode17"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode18"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode18"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode19"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode19"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode20"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode20"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode21"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode21"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode22"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode22"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode23"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode23"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode24"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode24"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode25"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode25"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode26"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode26"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode27"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode27"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode28"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode28"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode29"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode29"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode30"]), null);
+            intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode30"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode1"]), null);
+
+        }
 
     }
 }
