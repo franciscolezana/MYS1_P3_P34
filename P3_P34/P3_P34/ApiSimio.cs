@@ -35,15 +35,17 @@ namespace P3_P34
         {
 
           
-                this.crearRegiones();
-                this.crearMapa();
-                this.unirMapa();
-                //CREACION MODELO
-                SimioProjectFactory.SaveProject(proyectoApi, rutafinal, out warnings);
-                MessageBox.Show("El proyecto Simio ha sido generado");
-                Console.WriteLine("Modelo Creado");
+            this.crearRegiones();
+            this.crearMapa();
+            this.unirMapa();
+            this.tamanioFronteras();
+
+            //CREACION MODELO
+            SimioProjectFactory.SaveProject(proyectoApi, rutafinal, out warnings);
+            MessageBox.Show("El proyecto Simio ha sido generado");
+            Console.WriteLine("Modelo Creado");
           
-                //Console.WriteLine("Error al crear modelo");
+            //Console.WriteLine("Error al crear modelo");
 
         }
 
@@ -194,6 +196,54 @@ namespace P3_P34
             intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode29"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode30"]), null);
             intelligentObjects.CreateLink("Conveyor", ((INodeObject)model.Facility.IntelligentObjects["TransferNode30"]), ((INodeObject)model.Facility.IntelligentObjects["TransferNode1"]), null);
 
+        }
+
+        public void tamanioFronteras()
+        {
+            String con = "Conveyor";
+            for (int i = 1; i < 31; i++)
+            {
+                con = "Conveyor";
+                con += i;
+                model.Facility.IntelligentObjects[con].Properties["DrawnToScale"].Value = "False";
+            }
+
+            // Frontera con BELICE 266km
+            model.Facility.IntelligentObjects["Conveyor2"].Properties["LogicalLength"].Value = "250000";
+            model.Facility.IntelligentObjects["Conveyor3"].Properties["LogicalLength"].Value = "16000";
+            // Frontera con el caribe 148km
+            model.Facility.IntelligentObjects["Conveyor4"].Properties["LogicalLength"].Value = "28000";
+            model.Facility.IntelligentObjects["Conveyor5"].Properties["LogicalLength"].Value = "28000";
+            model.Facility.IntelligentObjects["Conveyor6"].Properties["LogicalLength"].Value = "28000";
+            model.Facility.IntelligentObjects["Conveyor7"].Properties["LogicalLength"].Value = "16000";
+            model.Facility.IntelligentObjects["Conveyor8"].Properties["LogicalLength"].Value = "14000";
+            model.Facility.IntelligentObjects["Conveyor9"].Properties["LogicalLength"].Value = "6000";
+            model.Facility.IntelligentObjects["Conveyor10"].Properties["LogicalLength"].Value = "28000";
+            // Frontera con Honduras 256km
+            model.Facility.IntelligentObjects["Conveyor11"].Properties["LogicalLength"].Value = "240000";
+            model.Facility.IntelligentObjects["Conveyor12"].Properties["LogicalLength"].Value = "16000";
+            // Frontera con El Salvador 203km
+            model.Facility.IntelligentObjects["Conveyor13"].Properties["LogicalLength"].Value = "53000";
+            model.Facility.IntelligentObjects["Conveyor14"].Properties["LogicalLength"].Value = "150000";
+            // Frontera con el Pacifico 254km
+            model.Facility.IntelligentObjects["Conveyor15"].Properties["LogicalLength"].Value = "88000";
+            model.Facility.IntelligentObjects["Conveyor16"].Properties["LogicalLength"].Value = "84000";
+            model.Facility.IntelligentObjects["Conveyor17"].Properties["LogicalLength"].Value = "82000";
+            //Frontera con Mexico 962km 240 240 241 241
+            model.Facility.IntelligentObjects["Conveyor1"].Properties["LogicalLength"].Value = "252000"; //252
+            model.Facility.IntelligentObjects["Conveyor18"].Properties["LogicalLength"].Value = "84000"; //220
+            model.Facility.IntelligentObjects["Conveyor19"].Properties["LogicalLength"].Value = "22000";
+            model.Facility.IntelligentObjects["Conveyor20"].Properties["LogicalLength"].Value = "28000";
+            model.Facility.IntelligentObjects["Conveyor21"].Properties["LogicalLength"].Value = "86000";
+            model.Facility.IntelligentObjects["Conveyor22"].Properties["LogicalLength"].Value = "230000"; //230
+            model.Facility.IntelligentObjects["Conveyor23"].Properties["LogicalLength"].Value = "25000";  //260
+            model.Facility.IntelligentObjects["Conveyor24"].Properties["LogicalLength"].Value = "25000";
+            model.Facility.IntelligentObjects["Conveyor25"].Properties["LogicalLength"].Value = "25000";
+            model.Facility.IntelligentObjects["Conveyor26"].Properties["LogicalLength"].Value = "25000";
+            model.Facility.IntelligentObjects["Conveyor27"].Properties["LogicalLength"].Value = "25000";
+            model.Facility.IntelligentObjects["Conveyor28"].Properties["LogicalLength"].Value = "25000";
+            model.Facility.IntelligentObjects["Conveyor29"].Properties["LogicalLength"].Value = "40000";
+            model.Facility.IntelligentObjects["Conveyor30"].Properties["LogicalLength"].Value = "70000";
         }
 
     }
