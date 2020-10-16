@@ -39,6 +39,7 @@ namespace P3_P34
             this.crearMapa();
             this.unirMapa();
             this.tamanioFronteras();
+            this.velocidadAvion();
 
             //CREACION MODELO
             SimioProjectFactory.SaveProject(proyectoApi, rutafinal, out warnings);
@@ -203,8 +204,7 @@ namespace P3_P34
             String con = "Conveyor";
             for (int i = 1; i < 31; i++)
             {
-                con = "Conveyor";
-                con += i;
+                con = "Conveyor" + i;
                 model.Facility.IntelligentObjects[con].Properties["DrawnToScale"].Value = "False";
             }
 
@@ -244,6 +244,16 @@ namespace P3_P34
             model.Facility.IntelligentObjects["Conveyor28"].Properties["LogicalLength"].Value = "25000";
             model.Facility.IntelligentObjects["Conveyor29"].Properties["LogicalLength"].Value = "40000";
             model.Facility.IntelligentObjects["Conveyor30"].Properties["LogicalLength"].Value = "70000";
+        }
+
+        public void velocidadAvion()
+        {
+            String con = "";
+            for (int i = 1; i < 31; i++)
+            {
+                con = "Conveyor" + i;
+                model.Facility.IntelligentObjects[con].Properties["InitialDesiredSpeed"].Value = "16.6667"; //"MetersPerSecond"
+            }
         }
 
     }
