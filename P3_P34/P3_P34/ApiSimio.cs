@@ -9,6 +9,7 @@ using Simio.SimioEnums;
 using SimioAPI.Extensions;
 using SimioAPI.Graphics;
 using Simio;
+using System.Windows.Forms;
 
 namespace P3_P34
 {
@@ -21,7 +22,7 @@ namespace P3_P34
         private IModel model;
         private IIntelligentObjects intelligentObjects;
         int ContadorPath = 1, ContadorServer = 1, ContadorSource = 1, ContadorSink = 1, ContadorPathSimple = 1, ContadorTimepath = 1, ContadorConveyor = 1, ContadorSeparator = 1, ContadorCombiner = 1;
-
+        int ContadorTransferNode = 1, contAux = 1;
         public ApiSimio()
         {
             proyectoApi = SimioProjectFactory.LoadProject(rutabase, out warnings);
@@ -33,74 +34,132 @@ namespace P3_P34
         public void crearModelo()
         {
 
-            try
-            {
-                //Source
-                intelligentObjects.CreateObject("Source", new FacilityLocation(5, 0, -5)); //x,z,y
-                model.Facility.IntelligentObjects["Source" + ContadorSource].Properties["InterarrivalTime"].Value = "0.1";
-
-                //Server
-                intelligentObjects.CreateObject("Server", new FacilityLocation(10, 0, -5)); //x,z,y
-                model.Facility.IntelligentObjects["Server" + ContadorServer].Properties["ProcessingTime"].Value = "2";
-
-                //Sink
-                intelligentObjects.CreateObject("Sink", new FacilityLocation(15, 0, -5)); //x,z,y
-
-                //Source a Server
-                intelligentObjects.CreateLink("Path", ((IFixedObject)model.Facility.IntelligentObjects["Source1"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Server1"]).Nodes[0], null);
-
-
-                //Server a Sink
-                intelligentObjects.CreateLink("Path", ((IFixedObject)model.Facility.IntelligentObjects["Server1"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Sink1"]).Nodes[0], null);
-
-                //Cambiar propiedades de path
-                model.Facility.IntelligentObjects["Path" + ContadorPathSimple].Properties["DrawnToScale"].Value = "False";
-                model.Facility.IntelligentObjects["Path" + ContadorPathSimple].Properties["LogicalLength"].Value = "0";
-
-                ContadorPathSimple++;
-                ContadorServer++;
-                ContadorSink++;
-                ContadorSource++;
-
-                //Combiners y Separators
-                intelligentObjects.CreateObject("Source", new FacilityLocation(5, 0, -20)); //x,z,y
-                intelligentObjects.CreateObject("Sink", new FacilityLocation(30, 0, -20)); //x,z,y
-
-                //combiner
-                intelligentObjects.CreateObject("Combiner", new FacilityLocation(10, 0, -20)); //x,z,y
-
-                model.Facility.IntelligentObjects["Combiner" + ContadorCombiner].Properties["FailureType"].Value = "Processing Count Based";
-                model.Facility.IntelligentObjects["Combiner" + ContadorCombiner].Properties["CountBetweenFailures"].Value = "10";
-                model.Facility.IntelligentObjects["Combiner" + ContadorCombiner].Properties["TimeToRepair"].Value = "1";
-                model.Facility.IntelligentObjects["Combiner" + ContadorCombiner].Properties["InitialCapacity"].Value = "5";
-                model.Facility.IntelligentObjects["Combiner" + ContadorCombiner].Properties["BatchQuantity"].Value = "10";
-                model.Facility.IntelligentObjects["Combiner" + ContadorCombiner].Properties["ProcessingTime"].Value = "2";
-
-                //separator
-                intelligentObjects.CreateObject("Separator", new FacilityLocation(20, 0, -20)); //x,z,y
-
-                //Source a Combiner
-                intelligentObjects.CreateLink("Path", ((IFixedObject)model.Facility.IntelligentObjects["Source1"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Combiner1"]).Nodes[0], null);
-                intelligentObjects.CreateLink("Path", ((IFixedObject)model.Facility.IntelligentObjects["Source2"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Combiner1"]).Nodes[1], null);
-
-                //Combiner a Separator
-                intelligentObjects.CreateLink("Path", ((IFixedObject)model.Facility.IntelligentObjects["Combiner" + ContadorCombiner]).Nodes[2], ((IFixedObject)model.Facility.IntelligentObjects["Separator" + ContadorSeparator]).Nodes[0], null);
-
-                //Separator a Sink
-                intelligentObjects.CreateLink("Path", ((IFixedObject)model.Facility.IntelligentObjects["Separator" + ContadorSeparator]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Sink2"]).Nodes[0], null);
-                intelligentObjects.CreateLink("Path", ((IFixedObject)model.Facility.IntelligentObjects["Separator" + ContadorSeparator]).Nodes[2], ((IFixedObject)model.Facility.IntelligentObjects["Sink2"]).Nodes[0], null);
-                ContadorCombiner++;
-                ContadorSeparator++;
-
+          
+                this.crearRegiones();
+                this.crearMapa();
 
                 //CREACION MODELO
                 SimioProjectFactory.SaveProject(proyectoApi, rutafinal, out warnings);
                 Console.WriteLine("Modelo Creado");
-            }
-            catch
-            {
-                Console.WriteLine("Error al crear modelo");
-            }
+          
+                //Console.WriteLine("Error al crear modelo");
+
         }
+
+        public void crearRegiones()
+        {
+            intelligentObjects.CreateObject("Server", new FacilityLocation(0, 0, 0));  //Metropolitana
+            intelligentObjects.CreateObject("Server", new FacilityLocation(5, 0, -20));  //Norte
+            intelligentObjects.CreateObject("Server", new FacilityLocation(30, 0, -10));  //Nor-Oriente
+            intelligentObjects.CreateObject("Server", new FacilityLocation(15, 0, 20));  //Sur-Oriente
+            intelligentObjects.CreateObject("Server", new FacilityLocation(-15, 0, 20));  //Central
+            intelligentObjects.CreateObject("Server", new FacilityLocation(-40, 0, 10));  //Sur-Occidente   
+            intelligentObjects.CreateObject("Server", new FacilityLocation(-40, 0, -20));  //Nor-Occidente         
+            intelligentObjects.CreateObject("Server", new FacilityLocation(10, 0, -50));  //Peten
+
+            model.Facility.IntelligentObjects["Server1"].ObjectName = "Metropolitana";
+            model.Facility.IntelligentObjects["Server2"].ObjectName = "Norte";
+            model.Facility.IntelligentObjects["Server3"].ObjectName = "NorOriente";
+            model.Facility.IntelligentObjects["Server4"].ObjectName = "SurOriente";
+            model.Facility.IntelligentObjects["Server5"].ObjectName = "Central";
+            model.Facility.IntelligentObjects["Server6"].ObjectName = "SurOccidente";
+            model.Facility.IntelligentObjects["Server7"].ObjectName = "NorOccidente";
+            model.Facility.IntelligentObjects["Server8"].ObjectName = "Peten";
+        }
+
+        public void crearMapa()
+        {
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-20, 0, -73));
+            ContadorTransferNode++;
+
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(33, 0, -73));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(33, 0, -20));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(49, 0, -20));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(40, 0, -10));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(48, 0, -11));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(50, 0, -20));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(56, 0, -16));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(58, 0, -18));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(56, 0, -22)); //10
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(64, 0, -14));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(38, 0, 12));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(40, 0, 19));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(30, 0, 25));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(21, 0, 40));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(1, 0, 34));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-23, 0, 36));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-57, 0, 21));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-58, 0, 4));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-53, 0, 2));//20
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-59, 0, -5));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-50, 0, -26));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-9, 0, -26));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-8, 0, -32));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-13, 0, -35));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-14, 0, -41));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-21, 0, -46));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-28, 0, -48));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-35, 0, -54));
+            ContadorTransferNode++;
+            
+            intelligentObjects.CreateObject("TransferNode", new FacilityLocation(-20, 0, -54));
+            ContadorTransferNode++;
+        }
+
+
     }
 }
