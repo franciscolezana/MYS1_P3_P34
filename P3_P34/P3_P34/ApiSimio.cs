@@ -23,11 +23,13 @@ namespace P3_P34
         private IIntelligentObjects intelligentObjects;
         int ContadorPath = 1, ContadorServer = 1, ContadorSource = 1, ContadorSink = 1, ContadorPathSimple = 1, ContadorTimepath = 1, ContadorConveyor = 1, ContadorSeparator = 1, ContadorCombiner = 1;
         int ContadorTransferNode = 1, contAux = 1, ContadorBasicN = 1;
+        private SimioAPI.FacilitySize tamanioAvionMilitar;
         public ApiSimio()
         {
             proyectoApi = SimioProjectFactory.LoadProject(rutabase, out warnings);
             model = proyectoApi.Models[1];
             intelligentObjects = model.Facility.IntelligentObjects;
+
         }
 
 
@@ -231,6 +233,11 @@ namespace P3_P34
             model.Facility.IntelligentObjects["SalidaFuerzaArmada"].Properties["InterarrivalTime"].Value = "Random.Exponential(15)";
             model.Facility.IntelligentObjects["SalidaFuerzaArmada"].Properties["MaximumArrivals"].Value = "15";
             model.Facility.IntelligentObjects["SalidaFuerzaArmada"].Properties["EntityType"].Value = "AvionMilitar";
+            // SET TAMAÑO ENTIDAD
+            tamanioAvionMilitar.Length = 3;
+            tamanioAvionMilitar.Height = 3;
+            tamanioAvionMilitar.Width = 3;
+            model.Facility.IntelligentObjects["AvionMilitar"].Size = tamanioAvionMilitar;
 
         }
 
