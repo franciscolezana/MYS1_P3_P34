@@ -44,6 +44,7 @@ namespace P3_P34
             this.velocidadAvion();
             this.puntosCardinales();
             this.comportamientoTurista();
+            this.configAvion();
 
             //CREACION MODELO
             SimioProjectFactory.SaveProject(proyectoApi, rutafinal, out warnings);
@@ -79,6 +80,7 @@ namespace P3_P34
             #region ENTIDAD
             intelligentObjects.CreateObject("ModelEntity", new FacilityLocation(-8, 0, -64));
             intelligentObjects.CreateObject("ModelEntity", new FacilityLocation(0, 0, 0));
+            intelligentObjects.CreateObject("ModelEntity", new FacilityLocation(-93, 0, -10));
             #endregion
 
             //FUERZAS ARMADAS
@@ -110,11 +112,18 @@ namespace P3_P34
             //PETEN
             intelligentObjects.CreateObject("Source", new FacilityLocation(10, 0, -50));  //Peten
             intelligentObjects.CreateObject("Sink", new FacilityLocation(10, 0, -50));  //Peten
+
+            //---Aeropuerto 
+            intelligentObjects.CreateObject("Source", new FacilityLocation(-7, 0, 0));  //Metropolitana
+            intelligentObjects.CreateObject("Source", new FacilityLocation(10, 0, -60));  //Peten
+            intelligentObjects.CreateObject("Source", new FacilityLocation(-50, 0, 10));  //Sur-Occidente 
             #endregion
 
             //ENTIDAD
             model.Facility.IntelligentObjects["ModelEntity1"].ObjectName = "AvionMilitar";
             model.Facility.IntelligentObjects["ModelEntity2"].ObjectName = "Turista";
+            model.Facility.IntelligentObjects["ModelEntity3"].ObjectName = "Avion";
+
 
             #region NombreSink&Source
             //FUERZAS ARMADAS
@@ -144,6 +153,11 @@ namespace P3_P34
             //PETEN
             model.Facility.IntelligentObjects["Source9"].ObjectName = "PetenE";
             model.Facility.IntelligentObjects["Sink9"].ObjectName = "PetenI";
+
+            //AEROPUERTO
+            model.Facility.IntelligentObjects["Source10"].ObjectName = "MetropolitanaA";
+            model.Facility.IntelligentObjects["Source11"].ObjectName = "PetenA";
+            model.Facility.IntelligentObjects["Source12"].ObjectName = "SurOccidenteA";
             #endregion
         }
 
@@ -582,6 +596,48 @@ namespace P3_P34
             model.Facility.IntelligentObjects[nombre].Properties["SelectionWeight"].Value = Peso;
             model.Facility.IntelligentObjects[nombre].Properties["LogicalLength"].Value = mult.ToString();
             model.Facility.IntelligentObjects[nombre].Properties["InitialDesiredSpeed"].Value = "19.4444"; //"MetersPerSecond"
+
+        }
+
+        public void configAvion() {
+            //---Asociar entidades a los aeropuertos
+            model.Facility.IntelligentObjects["MetropolitanaA"].Properties["EntityType"].Value = "Avion";
+            model.Facility.IntelligentObjects["PetenA"].Properties["EntityType"].Value = "Avion";
+            model.Facility.IntelligentObjects["SurOccidenteA"].Properties["EntityType"].Value = "Avion";
+            //--Tasa Llegada
+            model.Facility.IntelligentObjects["MetropolitanaA"].Properties["InterarrivalTime"].Value = "Random.Exponential(35)";
+            model.Facility.IntelligentObjects["PetenA"].Properties["InterarrivalTime"].Value = "Random.Exponential(50)";
+            model.Facility.IntelligentObjects["SurOccidenteA"].Properties["InterarrivalTime"].Value = "Random.Exponential(70)";
+            //--Llegadas por arribo
+            model.Facility.IntelligentObjects["MetropolitanaA"].Properties["EntitiesPerArrival"].Value = "70";
+            model.Facility.IntelligentObjects["PetenA"].Properties["EntitiesPerArrival"].Value = "40";
+            model.Facility.IntelligentObjects["SurOccidenteA"].Properties["EntitiesPerArrival"].Value = "30";
+
+            //--Crear RUTAS
+            //96-97
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
+            //98-99
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["PetenA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["PetenI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["PetenA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], null);
+            //100-101
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], null);
+            
+            //--Por peso source
+            ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaA"]).Nodes[0].Properties["OutboundLinkRule"].Value = "By Link Weight";
+            ((IFixedObject)model.Facility.IntelligentObjects["PetenA"]).Nodes[0].Properties["OutboundLinkRule"].Value = "By Link Weight";
+            ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteA"]).Nodes[0].Properties["OutboundLinkRule"].Value = "By Link Weight";
+
+            //--Colocar Peso
+            model.Facility.IntelligentObjects["Conveyor96"].Properties["SelectionWeight"].Value = "0.5";//se va
+            model.Facility.IntelligentObjects["Conveyor97"].Properties["SelectionWeight"].Value = "0.5";
+
+            model.Facility.IntelligentObjects["Conveyor98"].Properties["SelectionWeight"].Value = "0.3";
+            model.Facility.IntelligentObjects["Conveyor99"].Properties["SelectionWeight"].Value = "0.7";
+
+            model.Facility.IntelligentObjects["Conveyor100"].Properties["SelectionWeight"].Value = "0.4";
+            model.Facility.IntelligentObjects["Conveyor101"].Properties["SelectionWeight"].Value = "0.6";
 
         }
 
