@@ -574,6 +574,8 @@ namespace P3_P34
             int mult = dist * 1000;
             model.Facility.IntelligentObjects[nombre].Properties["SelectionWeight"].Value = Peso;
             model.Facility.IntelligentObjects[nombre].Properties["LogicalLength"].Value = mult.ToString();
+            model.Facility.IntelligentObjects[nombre].Properties["InitialDesiredSpeed"].Value = "19.4444"; //"MetersPerSecond"
+
         }
 
     }
