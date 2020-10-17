@@ -1,0 +1,11 @@
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\bin\Debug\P3_P34.exe.config
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\bin\Debug\P3_P34.exe
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\[MYS1]Practica3_P34.csprojAssemblyReference.cache
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.Form1.resources
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.Properties.Resources.resources
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\[MYS1]Practica3_P34.csproj.GenerateResource.cache
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\[MYS1]Practica3_P34.csproj.CoreCompileInputs.cache
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\[MYS1]Practica3_P34.csproj.CopyComplete
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.exe
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\obj\Debug\P3_P34.pdb
+D:\Documentos\Universidad\12. Segundo Semestre\Modela\MYS1_P3_P34\P3_P34\P3_P34\bin\Debug\P3_P34.pdb

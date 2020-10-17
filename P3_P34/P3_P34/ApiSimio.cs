@@ -114,9 +114,9 @@ namespace P3_P34
             intelligentObjects.CreateObject("Sink", new FacilityLocation(10, 0, -50));  //Peten
 
             //---Aeropuerto 
-            intelligentObjects.CreateObject("Source", new FacilityLocation(-7, 0, 0));  //Metropolitana
+            intelligentObjects.CreateObject("Source", new FacilityLocation(-10, 0, -10));  //Metropolitana
             intelligentObjects.CreateObject("Source", new FacilityLocation(10, 0, -60));  //Peten
-            intelligentObjects.CreateObject("Source", new FacilityLocation(-50, 0, 10));  //Sur-Occidente 
+            intelligentObjects.CreateObject("Source", new FacilityLocation(-53, 0, 14));  //Sur-Occidente 
             #endregion
 
             //ENTIDAD
@@ -285,7 +285,7 @@ namespace P3_P34
             model.Facility.IntelligentObjects["Conveyor15"].Properties["LogicalLength"].Value = "88000";
             model.Facility.IntelligentObjects["Conveyor16"].Properties["LogicalLength"].Value = "84000";
             model.Facility.IntelligentObjects["Conveyor17"].Properties["LogicalLength"].Value = "82000";
-            //Frontera con Mexico 962km 240 240 241 241
+            //Frontera con Mexico 962km 
             model.Facility.IntelligentObjects["Conveyor1"].Properties["LogicalLength"].Value = "252000"; //252
             model.Facility.IntelligentObjects["Conveyor18"].Properties["LogicalLength"].Value = "84000"; //220
             model.Facility.IntelligentObjects["Conveyor19"].Properties["LogicalLength"].Value = "22000";
@@ -381,104 +381,64 @@ namespace P3_P34
         public void rutasTurista()
         {
             //---Salidas desde los source
-            #region Metropolitana32-35
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], null);
-
-
-            #endregion
-            #region Norte36-39
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorteI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], null);
-            #endregion
-            #region Nor-Oriente40-44
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOrienteI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], null);
-            #endregion
-            #region Sur-Oriente45-48
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOrienteI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
-            #endregion
-            #region Central49-53
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["CentralE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["CentralI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["CentralE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["CentralE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["CentralE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["CentralE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], null);
-            #endregion
-            #region Sur-Occidente54-56
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
-            #endregion
-            #region Nor-Occidente57-60
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidenteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidenteI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidenteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidenteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidenteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], null);
-            #endregion
-            #region Peten61-63
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["PetenE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["PetenI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["PetenE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["PetenE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
+            #region Source32-39
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOrienteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["CentralE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidenteE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["PetenE"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], null);
             #endregion
             //---Salidas desde los server
-            #region Metropolitana64-67
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], null);
+            #region Metropolitana40-43
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], null);
             #endregion
-            #region Norte68-71
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorteI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], null);
+            #region Norte44-47
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["NorteI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], null);
             #endregion
-            #region Nor-Oriente72-76
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOrienteI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], null);
+            #region Nor-Oriente48-52
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["NorOrienteI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], null);
             #endregion
-            #region Sur-Oriente77-80
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOrienteI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
+            #region Sur-Oriente53-56
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["SurOrienteI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
             #endregion
-            #region Central81-85
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["CentralI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], null);
+            #region Central57-61
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["CentralI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["SurOriente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], null);
             #endregion
-            #region Sur-Occidente86-88
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
+            #region Sur-Occidente62-64
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
             #endregion
-            #region Nor-Occidente89-92
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidenteI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], null);
+            #region Nor-Occidente65-68
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["NorOccidenteI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Central"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["NorOccidente"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], null);
             #endregion
-            #region Peten93-95
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["PetenI"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], null);
-            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
+            #region Peten69-71
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["PetenI"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["Norte"]).Nodes[0], null);
+            intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[1], ((IFixedObject)model.Facility.IntelligentObjects["NorOriente"]).Nodes[0], null);
             #endregion
             //---TODOS LOS CONVEYOR POR PESO
             this.porPeso();
@@ -510,83 +470,123 @@ namespace P3_P34
         public void colocarDistanciaPeso()
         {
             String con = "Conveyor";
-            for (int i = 32; i < 96; i++)
+            for (int i = 32; i < 72; i++)
             {
                 con = "Conveyor" + i;
                 model.Facility.IntelligentObjects[con].Properties["DrawnToScale"].Value = "False";
             }
             #region SalidasSource
-            //--Server32-63
-            llenarPath("Conveyor32", "0.35", "0");
-            llenarPath("Conveyor33", "0.30", "63");
-            llenarPath("Conveyor34", "0.15", "124");
-            llenarPath("Conveyor35", "0.20", "241");
-            llenarPath("Conveyor36", "0.40", "0");
-            llenarPath("Conveyor37", "0.40", "147");
-            llenarPath("Conveyor38", "0.10", "138");
-            llenarPath("Conveyor39", "0.10", "145");
-            llenarPath("Conveyor40", "0.20", "0");
-            llenarPath("Conveyor41", "0.30", "241");
-            llenarPath("Conveyor42", "0.15", "138");
-            llenarPath("Conveyor43", "0.05", "231");
-            llenarPath("Conveyor44", "0.30", "282");
-            llenarPath("Conveyor45", "0.40", "0");
-            llenarPath("Conveyor46", "0.20", "231");
-            llenarPath("Conveyor47", "0.25", "124");
-            llenarPath("Conveyor48", "0.15", "154");
-            llenarPath("Conveyor49", "0.35", "0");
-            llenarPath("Conveyor50", "0.35", "63");
-            llenarPath("Conveyor51", "0.05", "154");
-            llenarPath("Conveyor52", "0.15", "155");
-            llenarPath("Conveyor53", "0.10", "269");
-            llenarPath("Conveyor54", "0.35", "0");
-            llenarPath("Conveyor55", "0.30", "87");
-            llenarPath("Conveyor56", "0.35", "155");
-            llenarPath("Conveyor57", "0.40", "0");
-            llenarPath("Conveyor58", "0.30", "87");
-            llenarPath("Conveyor59", "0.10", "269");
-            llenarPath("Conveyor60", "0.20", "145");
-            llenarPath("Conveyor61", "0.50", "0");
-            llenarPath("Conveyor62", "0.25", "147");
-            llenarPath("Conveyor63", "0.25", "282");
+            //--Server32-29
+            llenarPath("Conveyor32", "1", "0");
+            llenarPath("Conveyor33", "1", "0");
+            llenarPath("Conveyor34", "1", "0");
+            llenarPath("Conveyor35", "1", "0");
+            llenarPath("Conveyor36", "1", "0");
+            llenarPath("Conveyor37", "1", "0");
+            llenarPath("Conveyor38", "1", "0");
+            llenarPath("Conveyor39", "1", "0");
             #endregion
 
             #region SalidasServer
             //--Source64-95
-            llenarPath("Conveyor64", "0.35", "0");
-            llenarPath("Conveyor65", "0.30", "63");
-            llenarPath("Conveyor66", "0.15", "124");
-            llenarPath("Conveyor67", "0.20", "241");
-            llenarPath("Conveyor68", "0.40", "0");
-            llenarPath("Conveyor69", "0.40", "147");
-            llenarPath("Conveyor70", "0.10", "138");
-            llenarPath("Conveyor71", "0.10", "145");
-            llenarPath("Conveyor72", "0.20", "0");
-            llenarPath("Conveyor73", "0.30", "241");
-            llenarPath("Conveyor74", "0.15", "138");
-            llenarPath("Conveyor75", "0.05", "231");
-            llenarPath("Conveyor76", "0.30", "282");
-            llenarPath("Conveyor77", "0.40", "0");
-            llenarPath("Conveyor78", "0.20", "231");
-            llenarPath("Conveyor79", "0.25", "124");
-            llenarPath("Conveyor80", "0.15", "154");
-            llenarPath("Conveyor81", "0.35", "0");
-            llenarPath("Conveyor82", "0.35", "63");
-            llenarPath("Conveyor83", "0.05", "154");
-            llenarPath("Conveyor84", "0.15", "155");
-            llenarPath("Conveyor85", "0.10", "269");
-            llenarPath("Conveyor86", "0.35", "0");
-            llenarPath("Conveyor87", "0.30", "87");
-            llenarPath("Conveyor88", "0.35", "155");
-            llenarPath("Conveyor89", "0.40", "0");
-            llenarPath("Conveyor90", "0.30", "87");
-            llenarPath("Conveyor91", "0.10", "269");
-            llenarPath("Conveyor92", "0.20", "145");
-            llenarPath("Conveyor93", "0.50", "0");
-            llenarPath("Conveyor94", "0.25", "147");
-            llenarPath("Conveyor95", "0.25", "282");
+            llenarPath("Conveyor40", "0.35", "0");
+            llenarPath("Conveyor41", "0.30", "63");
+            llenarPath("Conveyor42", "0.15", "124");
+            llenarPath("Conveyor43", "0.20", "241");
+            llenarPath("Conveyor44", "0.40", "0");
+            llenarPath("Conveyor45", "0.40", "147");
+            llenarPath("Conveyor46", "0.10", "138");
+            llenarPath("Conveyor47", "0.10", "145");
+            llenarPath("Conveyor48", "0.20", "0");
+            llenarPath("Conveyor49", "0.30", "241");
+            llenarPath("Conveyor50", "0.15", "138");
+            llenarPath("Conveyor51", "0.05", "231");
+            llenarPath("Conveyor52", "0.30", "282");
+            llenarPath("Conveyor53", "0.40", "0");
+            llenarPath("Conveyor54", "0.20", "231");
+            llenarPath("Conveyor55", "0.25", "124");
+            llenarPath("Conveyor56", "0.15", "154");
+            llenarPath("Conveyor57", "0.35", "0");
+            llenarPath("Conveyor58", "0.35", "63");
+            llenarPath("Conveyor59", "0.05", "154");
+            llenarPath("Conveyor60", "0.15", "155");
+            llenarPath("Conveyor61", "0.10", "269");
+            llenarPath("Conveyor62", "0.35", "0");
+            llenarPath("Conveyor63", "0.30", "87");
+            llenarPath("Conveyor64", "0.35", "155");
+            llenarPath("Conveyor65", "0.40", "0");
+            llenarPath("Conveyor66", "0.30", "87");
+            llenarPath("Conveyor67", "0.10", "269");
+            llenarPath("Conveyor68", "0.20", "145");
+            llenarPath("Conveyor69", "0.50", "0");
+            llenarPath("Conveyor70", "0.25", "147");
+            llenarPath("Conveyor71", "0.25", "282");
             #endregion
 
+        }
+
+        public void colocarNombre()
+        {
+            #region SalidasSource
+            //--Server32-39
+            setNameObject("Conveyor32", "MetropolitanaE", "Metropolitana");
+            setNameObject("Conveyor33", "NorteE", "Norte");
+            setNameObject("Conveyor34", "NorOrienteE", "NorOriente");
+            setNameObject("Conveyor35", "SurOrienteE", "SurOriente");
+            setNameObject("Conveyor36", "CentralE", "Central");
+            setNameObject("Conveyor37", "SurOccidenteE", "SurOccidente");
+            setNameObject("Conveyor38", "NorOccidenteE", "NorOccidente");
+            setNameObject("Conveyor39", "PetenE", "Peten");
+            #endregion
+
+            #region SalidasServer
+            //--Source64-95
+            setNameObject("Conveyor40", "Metropolitana", "MetropolitanaI");
+            setNameObject("Conveyor41", "Metropolitana", "Central");
+            setNameObject("Conveyor42", "Metropolitana", "NorOriente");
+            setNameObject("Conveyor43", "Metropolitana", "SurOriente");
+            setNameObject("Conveyor44", "Norte", "NorteI");
+            setNameObject("Conveyor45", "Norte", "Peten");
+            setNameObject("Conveyor46", "Norte", "NorOriente");
+            setNameObject("Conveyor47", "Norte", "NorOccidente");
+            setNameObject("Conveyor48", "NorOriente", "NorOrienteI");
+            setNameObject("Conveyor49", "NorOriente", "Metropolitana");
+            setNameObject("Conveyor50", "NorOriente", "Norte");
+            setNameObject("Conveyor51", "NorOriente", "SurOriente");
+            setNameObject("Conveyor52", "NorOriente", "Peten");
+            setNameObject("Conveyor53", "SurOriente", "SurOrienteI");
+            setNameObject("Conveyor54", "SurOriente", "NorOriente");
+            setNameObject("Conveyor55", "SurOriente", "Metropolitana");
+            setNameObject("Conveyor56", "SurOriente", "Central");
+            setNameObject("Conveyor57", "Central", "CentralI");
+            setNameObject("Conveyor58", "Central", "Metropolitana");
+            setNameObject("Conveyor59", "Central", "SurOriente");
+            setNameObject("Conveyor60", "Central", "SurOccidente");
+            setNameObject("Conveyor61", "Central", "NorOccidente");
+            setNameObject("Conveyor62", "SurOccidente", "SurOccidenteI");
+            setNameObject("Conveyor63", "SurOccidente", "NorOccidente");
+            setNameObject("Conveyor64", "SurOccidente", "Central");
+            setNameObject("Conveyor65", "NorOccidente", "NorOccidenteI");
+            setNameObject("Conveyor66", "NorOccidente", "SurOccidente");
+            setNameObject("Conveyor67", "NorOccidente", "Central");
+            setNameObject("Conveyor68", "NorOccidente", "Norte");
+            setNameObject("Conveyor69", "Peten", "PetenI");
+            setNameObject("Conveyor70", "Peten", "Norte");
+            setNameObject("Conveyor71", "Peten", "NorOriente");
+            #endregion
+
+            setNameObject("Conveyor72", "Aurora", "QUEDA");
+            setNameObject("Conveyor73", "Aurora", "Metropolitana");
+            setNameObject("Conveyor74", "MundoMaya", "QUEDA");
+            setNameObject("Conveyor75", "MundoMaya", "Peten");
+            setNameObject("Conveyor76", "Quetzaltenango", "QUEDA");
+            setNameObject("Conveyor77", "Quetzaltenango", "SurOccidente");
+        }
+
+        public void setNameObject(string obj, string nameO, string nameD)
+        {
+            string name = "ruta" + nameO + nameD;
+            model.Facility.IntelligentObjects[obj].ObjectName = name;
         }
 
         public void llenarPath(String nombre,String Peso, String distancia)
@@ -614,13 +614,13 @@ namespace P3_P34
             model.Facility.IntelligentObjects["SurOccidenteA"].Properties["EntitiesPerArrival"].Value = "30";
 
             //--Crear RUTAS
-            //96-97
+            //72-73
             intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaI"]).Nodes[0], null);
             intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["MetropolitanaA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Metropolitana"]).Nodes[0], null);
-            //98-99
+            //74-75
             intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["PetenA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["PetenI"]).Nodes[0], null);
             intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["PetenA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["Peten"]).Nodes[0], null);
-            //100-101
+            //76-77
             intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteI"]).Nodes[0], null);
             intelligentObjects.CreateLink("Conveyor", ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteA"]).Nodes[0], ((IFixedObject)model.Facility.IntelligentObjects["SurOccidente"]).Nodes[0], null);
             
@@ -630,14 +630,16 @@ namespace P3_P34
             ((IFixedObject)model.Facility.IntelligentObjects["SurOccidenteA"]).Nodes[0].Properties["OutboundLinkRule"].Value = "By Link Weight";
 
             //--Colocar Peso
-            model.Facility.IntelligentObjects["Conveyor96"].Properties["SelectionWeight"].Value = "0.5";//se va
-            model.Facility.IntelligentObjects["Conveyor97"].Properties["SelectionWeight"].Value = "0.5";
+            model.Facility.IntelligentObjects["Conveyor72"].Properties["SelectionWeight"].Value = "0.5";//se queda en la region
+            model.Facility.IntelligentObjects["Conveyor73"].Properties["SelectionWeight"].Value = "0.5";//se va a otra region
 
-            model.Facility.IntelligentObjects["Conveyor98"].Properties["SelectionWeight"].Value = "0.3";
-            model.Facility.IntelligentObjects["Conveyor99"].Properties["SelectionWeight"].Value = "0.7";
+            model.Facility.IntelligentObjects["Conveyor74"].Properties["SelectionWeight"].Value = "0.3";//se queda 
+            model.Facility.IntelligentObjects["Conveyor75"].Properties["SelectionWeight"].Value = "0.7";//se va
 
-            model.Facility.IntelligentObjects["Conveyor100"].Properties["SelectionWeight"].Value = "0.4";
-            model.Facility.IntelligentObjects["Conveyor101"].Properties["SelectionWeight"].Value = "0.6";
+            model.Facility.IntelligentObjects["Conveyor76"].Properties["SelectionWeight"].Value = "0.4";//se queda
+            model.Facility.IntelligentObjects["Conveyor77"].Properties["SelectionWeight"].Value = "0.6";//se va
+
+            this.colocarNombre();
 
         }
 
