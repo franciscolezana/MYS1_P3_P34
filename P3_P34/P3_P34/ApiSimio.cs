@@ -16,20 +16,34 @@ namespace P3_P34
     class ApiSimio
     {
         private ISimioProject proyectoApi;
-        private string rutabase = "Modelobase.spfx";
-        private string rutafinal = "ModeloFinal.spfx";
+        private string rutabase = "[MYS1]ModeloBase_P34.spfx";
+        private string rutafinal = "[MYS1]ModeloFinal_P34.spfx";
         private string[] warnings;
         private IModel model;
         private IIntelligentObjects intelligentObjects;
         int ContadorPath = 1, ContadorServer = 1, ContadorSource = 1, ContadorSink = 1, ContadorPathSimple = 1, ContadorTimepath = 1, ContadorConveyor = 1, ContadorSeparator = 1, ContadorCombiner = 1;
         int ContadorTransferNode = 1, contAux = 1, ContadorBasicN = 1;
         private SimioAPI.FacilitySize tamanioAvionMilitar;
+        //CARNETS
+        private string rutacarnets = "[MYS1]ModeloFinalCarnets_P34.spfx";
+        private ISimioProject proyectoApiCarnets;
+        private string[] warningsC;
+        private IModel modelC;
+        private IIntelligentObjects intelligentObjectsC;
+        private SimioAPI.FacilitySize tamanio;
+        private SimioAPI.FacilitySize tamSource;
+        private SimioAPI.FacilitySize tamSink;
+
+
         public ApiSimio()
         {
             proyectoApi = SimioProjectFactory.LoadProject(rutabase, out warnings);
             model = proyectoApi.Models[1];
             intelligentObjects = model.Facility.IntelligentObjects;
-
+            //Carnets
+            proyectoApiCarnets = SimioProjectFactory.LoadProject(rutabase, out warningsC);
+            modelC = proyectoApiCarnets.Models[1];
+            intelligentObjectsC = modelC.Facility.IntelligentObjects;
         }
 
 
@@ -45,6 +59,7 @@ namespace P3_P34
             this.puntosCardinales();
             this.comportamientoTurista();
             this.configAvion();
+            this.crearCarnets();
 
             //CREACION MODELO
             SimioProjectFactory.SaveProject(proyectoApi, rutafinal, out warnings);
@@ -52,8 +67,11 @@ namespace P3_P34
             Console.WriteLine("Modelo Creado");
 
             //Console.WriteLine("Error al crear modelo");
-
+            SimioProjectFactory.SaveProject(proyectoApiCarnets, rutacarnets, out warningsC);
+            MessageBox.Show("El proyecto de Carnets ha sido generado");
+            Console.WriteLine("Modelo Creado");
         }
+
 
         public void crearRegiones()
         {
@@ -640,6 +658,226 @@ namespace P3_P34
             model.Facility.IntelligentObjects["Conveyor77"].Properties["SelectionWeight"].Value = "0.6";//se va
 
             this.colocarNombre();
+
+        }
+
+        //CARNETS
+
+        private void crearCarnets()
+        {            
+
+            //-------------------201503777
+            //2
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-23, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-20, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-20, 0, -3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-23, 0, -3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-23, 0, -1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-20, 0, -1));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode1"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode2"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode2"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode3"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode3"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode4"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode4"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode5"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode5"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode6"]), null);
+
+            //0
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-18, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-15, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-15, 0, -1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-18, 0, -1));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode7"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode8"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode8"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode9"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode9"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode10"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode10"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode7"]), null);
+            
+            //1
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-13, 0, -4));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-12, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-12, 0, -1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-11, 0, -1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-13, 0, -1));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode11"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode12"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode12"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode13"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode13"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode14"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode14"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode15"]), null);
+            
+            //5
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-6, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-9, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-9, 0, -3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-6, 0, -3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-6, 0, -1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-9, 0, -1));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode16"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode17"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode17"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode18"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode18"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode19"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode19"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode20"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode20"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode21"]), null);
+
+            //0
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-4, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-1, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-1, 0, -1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-4, 0, -1));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode22"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode23"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode23"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode24"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode24"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode25"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode25"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode22"]), null);
+           
+            //3
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(1, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(4, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(4, 0, -3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(2, 0, -3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(4, 0, -1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(1, 0, -1));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode26"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode27"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode27"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode30"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode30"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode31"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode28"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode29"]), null);
+            //7
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(6, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(9, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(7, 0, -1));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode32"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode33"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode33"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode34"]), null);
+            //7
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(11, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(14, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(12, 0, -1));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode35"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode36"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode36"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode37"]), null);
+            //7
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(16, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(19, 0, -5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(17, 0, -1));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode38"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode39"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode39"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode40"]), null);
+
+            //-------------------201503609
+
+            //2
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-23, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-20, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-20, 0, 3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-23, 0, 3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-23, 0, 5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-20, 0, 5));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode41"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode42"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode42"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode43"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode43"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode44"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode44"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode45"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode45"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode46"]), null);
+
+            //0
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-18, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-15, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-15, 0, 5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-18, 0, 5));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode47"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode48"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode48"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode49"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode49"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode50"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode50"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode47"]), null);
+
+            //1
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-13, 0, 2));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-12, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-12, 0, 5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-11, 0, 5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-13, 0, 5));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode51"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode52"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode52"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode53"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode53"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode54"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode54"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode55"]), null);
+
+            //5
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-6, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-9, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-9, 0, 3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-6, 0, 3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-6, 0, 5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-9, 0, 5));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode56"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode57"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode57"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode58"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode58"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode59"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode59"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode60"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode60"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode61"]), null);
+
+            //0
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-4, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-1, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-1, 0, 5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(-4, 0, 5));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode62"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode63"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode63"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode64"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode64"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode65"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode65"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode62"]), null);
+
+            //3
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(1, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(4, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(4, 0, 3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(2, 0, 3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(4, 0, 5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(1, 0, 5));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode66"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode67"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode67"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode70"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode70"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode71"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode68"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode69"]), null);
+            //6
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(9, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(6, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(6, 0, 5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(9, 0, 5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(9, 0, 3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(6, 0, 3));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode72"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode73"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode73"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode74"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode74"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode75"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode75"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode76"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode76"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode77"]), null);
+            //0
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(11, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(14, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(14, 0, 5));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(11, 0, 5));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode78"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode79"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode79"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode80"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode80"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode81"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode81"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode78"]), null);
+            //9
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(19, 0, 3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(16, 0, 3));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(16, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(19, 0, 1));
+            intelligentObjectsC.CreateObject("TransferNode", new FacilityLocation(19, 0, 5));
+
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode82"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode83"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode83"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode84"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode84"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode85"]), null);
+            intelligentObjectsC.CreateLink("Path", ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode85"]), ((INodeObject)modelC.Facility.IntelligentObjects["TransferNode86"]), null);
+
+            for (int i = 1; i < 87; i++)
+            {
+                modelC.Facility.IntelligentObjects["TransferNode" + i].ObjectName = "T" + i;
+            }
 
         }
 
